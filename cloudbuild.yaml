@@ -1,0 +1,15 @@
+# cloudbuild.yaml
+steps:
+  - name: 'gcr.io/cloud-builders/npm'
+    id: INSTALL
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    id: LINT
+    args: ['run', 'lint']
+    waitFor:
+      - INSTALL
+  - name: 'gcr.io/cloud-builders/npm'
+    id: TEST
+    args: ['run', 'test']
+    waitFor:
+      - INSTALL
